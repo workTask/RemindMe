@@ -41,7 +41,7 @@ private ViewPager viewPager;
 
     private void initTabs() {
         viewPager = (ViewPager)findViewById(R.id.viewPager);
-        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getSupportFragmentManager());
+        TabsPagerFragmentAdapter adapter = new TabsPagerFragmentAdapter(getApplicationContext(),getSupportFragmentManager());
         viewPager.setAdapter(adapter);
 
         tabLayout =(TabLayout)findViewById(R.id.tabLayout);

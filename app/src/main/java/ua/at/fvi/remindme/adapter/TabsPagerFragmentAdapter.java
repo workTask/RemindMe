@@ -1,42 +1,47 @@
 package ua.at.fvi.remindme.adapter;
 
+import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import ua.at.fvi.remindme.fragment.tabs.ExampleFragmentTabs;
+import java.util.HashMap;
+import java.util.Map;
+
+import ua.at.fvi.remindme.fragment.tabs.AbstractTabFragment;
+import ua.at.fvi.remindme.fragment.tabs.BirthdayFragment;
+import ua.at.fvi.remindme.fragment.tabs.HistoryFragment;
+import ua.at.fvi.remindme.fragment.tabs.IdeasFragment;
+import ua.at.fvi.remindme.fragment.tabs.TodoFragment;
 
 public class TabsPagerFragmentAdapter extends FragmentPagerAdapter {
-    private String[] tabs;
+    private Map<Integer, AbstractTabFragment> tabs;
+    private Context context;
 
-    public TabsPagerFragmentAdapter(FragmentManager fm) {
+    public TabsPagerFragmentAdapter(Context context, FragmentManager fm) {
         super(fm);
-        tabs =new String[]{"Tab 1", "Нагадування","Tab 3"};
+        this.context = context;
+        tabs = new HashMap<>();
+        tabs.put(0, HistoryFragment.getInstance(context));
+        tabs.put(1, IdeasFragment.getInstance(context));
+        tabs.put(2, TodoFragment.getInstance(context));
+        tabs.put(3,BirthdayFragment.getInstance(context));
     }
 
     @Override
     public Fragment getItem(int position) {
-        switch (position){
-            case 0:
-                return ExampleFragmentTabs.getInstance();
-            case 1:
-                return ExampleFragmentTabs.getInstance();
-            case 2:
-                return ExampleFragmentTabs.getInstance();
-        }
-
-        return null;
+        return tabs.get(position);
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        return tabs[position];
+        return tabs.get(position).getTitle();
     }
 
     @Override
     public int getCount() {
-        return tabs.length;
+        return tabs.size();
     }
 }

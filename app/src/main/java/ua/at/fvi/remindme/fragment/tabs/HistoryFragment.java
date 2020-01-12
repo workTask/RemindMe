@@ -1,6 +1,6 @@
 package ua.at.fvi.remindme.fragment.tabs;
 
-
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -9,14 +9,17 @@ import android.view.ViewGroup;
 
 import ua.at.fvi.remindme.R;
 
-public class ExampleFragmentTabs extends AbstractTabFragment {
-    private static final int LAYOUT = R.layout.fragment_example_tabs;
-    private View view;
+public class HistoryFragment extends AbstractTabFragment {
 
-    public static ExampleFragmentTabs getInstance() {
+    private static final int LAYOUT = R.layout.fragment_history;
+
+
+    public static HistoryFragment getInstance(Context  context) {
         Bundle args = new Bundle();
-        ExampleFragmentTabs fr = new ExampleFragmentTabs();
+        HistoryFragment fr = new HistoryFragment();
         fr.setArguments(args);
+        fr.setContext(context);
+        fr.setTitle(context.getString(R.string.tab_item_history));
         return fr;
     }
 
@@ -27,4 +30,9 @@ public class ExampleFragmentTabs extends AbstractTabFragment {
 
         return view;
     }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
 }
+
